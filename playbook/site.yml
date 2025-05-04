@@ -1,6 +1,7 @@
 ---
 - name: Install Clickhouse
   hosts: clickhouse
+  tags: clickhouse
   handlers:
     - name: Start clickhouse service
       become: true
@@ -8,7 +9,7 @@
         name: clickhouse-server
         state: restarted
   tasks:
-    - name: Get the hell
+    - name: Get clickhouse
       block:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
@@ -45,6 +46,7 @@
 
 - name: Install Vector
   hosts: vector
+  tags: vector
   handlers:
     - name: Start Vector service
       become: true
