@@ -12,7 +12,7 @@
       block:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
-            url: https://packages.clickhouse.com/deb/pool/main/c/{{item}}/{{ item }}_{{ clickhouse_version }}_amd64.deb
+            url: https://packages.clickhouse.com/deb/pool/main/c/{{ item }}/{{ item }}_{{ clickhouse_version }}_amd64.deb
             dest: ./{{ item }}_{{ clickhouse_version }}.deb
             mode: "0644"
           with_items: "{{ clickhouse_packages }}"
@@ -35,7 +35,7 @@
       ansible.builtin.meta: flush_handlers
     - name: Wait for clickhouse-server to get ready
       ansible.builtin.pause:
-        seconds: 10
+        seconds: 30
         echo: false
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
@@ -56,18 +56,14 @@
     - name: Get Vector distrib
       ansible.builtin.get_url:
         url: https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_amd64.deb
-        #url: "https://packages.timber.io/vector/0.46.1/vector-0.46.1-1.{{ ansible_architecture }}.rpm"
         dest: ./vector-{{ vector_version }}-amd64.deb
-        #dest: "./vector-0.46.1-1.{{ ansible_architecture }}.rpm"
         mode: "0644"
 
     - name: Install Vector packages
       become: true
       ansible.builtin.apt:
-        #name: vector-0.46.1-1.{{ ansible_architecture }}.rpm
         deb: ./vector-{{ vector_version }}-amd64.deb
-        #deb: /tmp/vector.deb
-      notify: 
+      notify:
         - Start Vector service
 
     - name: Copy vector config
@@ -78,3 +74,75 @@
         mode: '0644'
       notify:
         - Start Vector service
+
+- name: Install NGINX
+  hosts: lighthouse
+  tags: lighthouse
+  become: true
+  handlers:
+    - name: NGINX | Start nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+      listen: start nginx
+    - name: NGINX | Reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      listen: reload nginx
+  tasks:
+    - name: NGINX | Add nginx apt-key
+      ansible.builtin.apt_key:
+        url: http://nginx.org/keys/nginx_signing.key
+        state: present
+    - name: NGINX | Add nginx apt repository
+      ansible.builtin.apt_repository:
+        repo: 'deb https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx'
+        state: present
+        filename: nginx
+        update_cache: true
+    - name: NGINX | Install
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+      notify: start nginx
+    - name: NGINX | Create general config
+      ansible.builtin.template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        mode: "0644"
+      notify: reload nginx
+
+- name: Install Lighthouse
+  hosts: lighthouse
+  become: true
+  handlers:
+    - name: NGINX | Reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      listen: reload nginx
+  pre_tasks:
+    - name: Lighthouse | install dependencies
+      ansible.builtin.apt:
+        name: git
+        state: present
+
+  tasks:
+    - name: Lighthouse | Get from source
+      ansible.builtin.git:
+        repo: "{{ lighthouse_vcs }}"
+        version: master
+        dest: "{{ lighthouse_location }}"
+    - name: Wait for nginx to get ready
+      ansible.builtin.pause:
+        seconds: 30
+        echo: false
+    - name: Lighthouse | Create Lighthouse config
+      become: true
+      ansible.builtin.template:
+        src: templates/lighthouse.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        mode: "0644"
+      notify: reload nginx
