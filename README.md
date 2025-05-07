@@ -59,7 +59,7 @@
 
 [playbook](https://github.com/NataliyaKh/08-ansible-04/tree/main/playbook)
 
-**Важно**: Роль clickhouse, ссылка на которую приводится в задании, не срабатывает, плейбук падает по таймауту со слдующей ошибкой:
+**Важно**: Роль clickhouse, ссылка на которую приводится в задании, не срабатывает, плейбук падает по таймауту со следующей ошибкой:
 ```
 fatal: [clickhouse-01]: FAILED! => {"changed": false, "cmd": ["clickhouse-client", "-q", "create database logs;"], "delta": "0:00:00.050589", "end": "2025-05-07 01:10:49.932984", "failed_when_result": true, "msg": "non-zero return code", "rc": 210, "start": "2025-05-07 01:10:49.882395", "stderr": "Code: 210. DB::NetException: Connection refused (localhost:9000). (NETWORK_ERROR)", "stderr_lines": ["Code: 210. DB::NetException: Connection refused (localhost:9000). (NETWORK_ERROR)"], "stdout": "", "stdout_lines": []}
 ```
