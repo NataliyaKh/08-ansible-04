@@ -1,0 +1,104 @@
+INFO     Running default > verify
+
+INFO     Running Ansible Verifier
+
+
+
+PLAY [Verify] ******************************************************************
+
+
+
+TASK [Check Vector config file] ************************************************
+
+ok: [ubuntu2204]
+
+ok: [debian10]
+
+
+
+TASK [Check Vector config file presence] ***************************************
+
+ok: [debian10] => {
+
+    "changed": false,
+
+    "msg": "Vector config file exists"
+
+}
+
+ok: [ubuntu2204] => {
+
+    "changed": false,
+
+    "msg": "Vector config file exists"
+
+}
+
+
+
+TASK [Vector config validating] ************************************************
+
+changed: [ubuntu2204]
+
+changed: [debian10]
+
+
+
+TASK [Check result of validating] **********************************************
+
+ok: [debian10] => {
+
+    "changed": false,
+
+    "msg": "Vector config validated"
+
+}
+
+ok: [ubuntu2204] => {
+
+    "changed": false,
+
+    "msg": "Vector config validated"
+
+}
+
+
+
+TASK [Get process PID] *********************************************************
+
+changed: [debian10]
+
+changed: [ubuntu2204]
+
+
+
+TASK [Check running vector process] ********************************************
+
+ok: [debian10] => {
+
+    "changed": false,
+
+    "msg": "Vector running"
+
+}
+
+ok: [ubuntu2204] => {
+
+    "changed": false,
+
+    "msg": "Vector running"
+
+}
+
+
+
+PLAY RECAP *********************************************************************
+
+debian10                   : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+ubuntu2204                 : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+INFO     Verifier completed successfully.
+
