@@ -16,15 +16,15 @@
 ### Molecule
 
 1. Запустите  `molecule test -s ubuntu_xenial` (или с любым другим сценарием, не имеет значения) внутри корневой директории clickhouse-role, посмотрите на вывод команды. Данная команда может отработать с ошибками или не отработать вовсе, это нормально. Наша цель - посмотреть как другие в реальном мире используют молекулу И из чего может состоять сценарий тестирования.
-![xenial](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-1-xenial.png)`
+![xenial](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-1-xenial.png)
 
 2. Перейдите в каталог с ролью vector-role и создайте сценарий тестирования по умолчанию при помощи `molecule init scenario --driver-name docker`.
-![scenario](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-2-initsc.png)`
+![scenario](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-2-initsc.png)
 
 3. Добавьте несколько разных дистрибутивов (oraclelinux:8, ubuntu:latest) для инстансов и протестируйте роль, исправьте найденные ошибки, если они есть.
-![test1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-3-mtest1.png)`
+![test1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-3-mtest1.png)
 
-![test2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-3-mtest2.png)`
+![test2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-3-mtest2.png)
 
 [Лог molecule test](https://github.com/NataliyaKh/08-ansible-04/blob/main/molecule-test.log)
 
@@ -34,13 +34,13 @@
 5. Запустите тестирование роли повторно и проверьте, что оно прошло успешно.
 [Лог проверок](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-verifier.txt)
 
-![check1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-4-check1.png)`
+![check1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-4-check1.png)
 
 ![check2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5-4-check2.png)
 
 5. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 
-[commit2](https://github.com/NataliyaKh/vector/releases/tag/v0.2)`
+[commit2](https://github.com/NataliyaKh/vector/releases/tag/v0.2)
 
 ### Tox
 
@@ -48,9 +48,9 @@
 2. Запустите `docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash`, где path_to_repo — путь до корня репозитория с vector-role на вашей файловой системе.
 3. Внутри контейнера выполните команду `tox`, посмотрите на вывод.
 
-![tox1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox1.png)`
+![tox1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox1.png)
 
-![tox2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox2.png)`
+![tox2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox2.png)
 
 5. Создайте облегчённый сценарий для `molecule` с драйвером `molecule_podman`. Проверьте его на исполнимость.
 
@@ -68,7 +68,7 @@
 ERROR! Unexpected Exception, this is probably a bug: cannot import name 'should_retry_error' from 'ansible.galaxy.api' (/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible/galaxy/api.py)
 ```
 
-![toxError](https://github.com/NataliyaKh/08-ansible-04/blob/main/toxError.png)`
+![toxError](https://github.com/NataliyaKh/08-ansible-04/blob/main/toxError.png)
 
 Переустановка ansible и дополнительных пакетов не помогла. Мне нужна помощь. 
 
