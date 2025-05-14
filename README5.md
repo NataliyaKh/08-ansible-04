@@ -68,6 +68,8 @@
 ERROR! Unexpected Exception, this is probably a bug: cannot import name 'should_retry_error' from 'ansible.galaxy.api' (/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible/galaxy/api.py)
 ```
 
+![toxError](https://github.com/NataliyaKh/08-ansible-04/blob/main/toxError.png)`
+
 Переустановка ansible и дополнительных пакетов не помогла. Мне нужна помощь. 
 
 9. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
