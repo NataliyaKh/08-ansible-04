@@ -1,0 +1,160 @@
+root@OVM:/home/vboxuser/git/ansible/vector# tox
+
+py37-ansible210: skipped because could not find python interpreter with spec(s): py37
+
+py37-ansible210: SKIP ⚠ in 0.03 seconds
+
+py37-ansible30: skipped because could not find python interpreter with spec(s): py37
+
+py37-ansible30: SKIP ⚠ in 0.02 seconds
+
+py310-ansible210: commands[0]> molecule test -s second --destroy always
+
+WARNING  The scenario config file ('/home/vboxuser/git/ansible/vector/molecule/second/molecule.yml') has been modified since the scenario was created. If recent changes are important, reset the scenario with 'molecule destroy' to clean up created items or 'molecule reset' to clear current configuration.
+
+WARNING  Driver podman does not provide a schema.
+
+INFO     second scenario test matrix: destroy, create, converge, destroy
+
+INFO     Performing prerun with role_name_check=0...
+
+ERROR    [0;31mERROR! Unexpected Exception, this is probably a bug: cannot import name 'should_retry_error' from 'ansible.galaxy.api' (/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible/galaxy/api.py)[0m
+
+
+
+Traceback (most recent call last):
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/bin/molecule", line 8, in <module>
+
+    sys.exit(main())
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/core.py", line 1442, in __call__
+
+    return self.main(*args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/core.py", line 1363, in main
+
+    rv = self.invoke(ctx)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/core.py", line 1830, in invoke
+
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/core.py", line 1226, in invoke
+
+    return ctx.invoke(self.callback, **ctx.params)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/core.py", line 794, in invoke
+
+    return callback(*args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/click/decorators.py", line 34, in new_func
+
+    return f(get_current_context(), *args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/molecule/command/test.py", line 130, in test
+
+    base.execute_cmdline_scenarios(scenario_name, args, command_args, ansible_args, exclude)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/molecule/command/base.py", line 145, in execute_cmdline_scenarios
+
+    _run_scenarios(scenarios, command_args)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/molecule/command/base.py", line 198, in _run_scenarios
+
+    scenario.config.runtime.prepare_environment(
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible_compat/runtime.py", line 678, in prepare_environment
+
+    self.install_requirements(file_path, retry=retry, offline=offline)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible_compat/runtime.py", line 612, in install_requirements
+
+    raise AnsibleCommandError(result)
+
+ansible_compat.errors.AnsibleCommandError: Got 250 exit code while running: ansible-galaxy role install -r /home/vboxuser/git/ansible/vector/requirements.yml --roles-path /root/.ansible/roles
+
+py310-ansible210: exit 1 (2.10 seconds) /home/vboxuser/git/ansible/vector> molecule test -s second --destroy always pid=9667
+
+py310-ansible210: FAIL ✖ in 2.15 seconds
+
+py310-ansible30: commands[0]> molecule test -s second --destroy always
+
+WARNING  The scenario config file ('/home/vboxuser/git/ansible/vector/molecule/second/molecule.yml') has been modified since the scenario was created. If recent changes are important, reset the scenario with 'molecule destroy' to clean up created items or 'molecule reset' to clear current configuration.
+
+WARNING  Driver podman does not provide a schema.
+
+INFO     second scenario test matrix: destroy, create, converge, destroy
+
+INFO     Performing prerun with role_name_check=0...
+
+ERROR    [0;31mERROR! Unexpected Exception, this is probably a bug: cannot import name 'should_retry_error' from 'ansible.galaxy.api' (/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/ansible/galaxy/api.py)[0m
+
+Traceback (most recent call last):
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/bin/molecule", line 8, in <module>
+
+    sys.exit(main())
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/core.py", line 1442, in __call__
+
+
+
+    return self.main(*args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/core.py", line 1363, in main
+
+    rv = self.invoke(ctx)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/core.py", line 1830, in invoke
+
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/core.py", line 1226, in invoke
+
+    return ctx.invoke(self.callback, **ctx.params)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/core.py", line 794, in invoke
+
+    return callback(*args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/click/decorators.py", line 34, in new_func
+
+    return f(get_current_context(), *args, **kwargs)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/molecule/command/test.py", line 130, in test
+
+    base.execute_cmdline_scenarios(scenario_name, args, command_args, ansible_args, exclude)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/molecule/command/base.py", line 145, in execute_cmdline_scenarios
+
+    _run_scenarios(scenarios, command_args)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/molecule/command/base.py", line 198, in _run_scenarios
+
+    scenario.config.runtime.prepare_environment(
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/ansible_compat/runtime.py", line 678, in prepare_environment
+
+    self.install_requirements(file_path, retry=retry, offline=offline)
+
+  File "/home/vboxuser/git/ansible/vector/.tox/py310-ansible30/lib/python3.10/site-packages/ansible_compat/runtime.py", line 612, in install_requirements
+
+    raise AnsibleCommandError(result)
+
+ansible_compat.errors.AnsibleCommandError: Got 250 exit code while running: ansible-galaxy role install -r /home/vboxuser/git/ansible/vector/requirements.yml --roles-path /root/.ansible/roles
+
+py310-ansible30: exit 1 (2.11 seconds) /home/vboxuser/git/ansible/vector> molecule test -s second --destroy always pid=9692
+
+  py37-ansible210: SKIP (0.03 seconds)
+
+  py37-ansible30: SKIP (0.02 seconds)
+
+  py310-ansible210: FAIL code 1 (2.15=setup[0.06]+cmd[2.10] seconds)
+
+  py310-ansible30: FAIL code 1 (2.12=setup[0.01]+cmd[2.11] seconds)
+
+  evaluation failed :( (4.42 seconds)
+
+root@OVM:/home/vboxuser/git/ansible/vector# 
+
