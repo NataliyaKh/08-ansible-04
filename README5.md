@@ -44,13 +44,21 @@
 
 ### Tox
 
-1. Добавьте в директорию с vector-role файлы из [директории](./example).
+1. Добавьте в директорию с vector-role файлы из [директории](docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash).
 2. Запустите `docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash`, где path_to_repo — путь до корня репозитория с vector-role на вашей файловой системе.
 3. Внутри контейнера выполните команду `tox`, посмотрите на вывод.
 
-![tox1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox1.png)
+![tox1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox3.png)
 
-![tox2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox2.png)
+![tox2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox4.png)
+
+![tox3](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox5.png)
+
+![tox4](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox6.png)
+
+![tox5](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox7.png)
+
+[Вывод](https://github.com/NataliyaKh/08-ansible-04/blob/main/tox_aragast.log)
 
 5. Создайте облегчённый сценарий для `molecule` с драйвером `molecule_podman`. Проверьте его на исполнимость.
 
@@ -62,19 +70,15 @@
 
 8. Запустите команду `tox`. Убедитесь, что всё отработало успешно.
 
-Оно не отрабатывает. Я не могу избавиться от этой ошибки:
+![mytox1](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox8.png)
 
-```
-ERROR! Unexpected Exception, this is probably a bug: cannot import name 'should_retry_error' from 'ansible.galaxy.api' (/home/vboxuser/git/ansible/vector/.tox/py310-ansible210/lib/python3.10/site-packages/ansible/galaxy/api.py)
-```
+![mytox2](https://github.com/NataliyaKh/08-ansible-04/blob/main/ansible-5t3-tox9.png)
 
-![toxError](https://github.com/NataliyaKh/08-ansible-04/blob/main/toxError.png)
-
-Переустановка ansible и дополнительных пакетов не помогла. Мне нужна помощь. 
+[Log](https://github.com/NataliyaKh/08-ansible-04/blob/main/tox3_log.txt)
 
 9. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 
-[tag3](https://github.com/NataliyaKh/vector/releases/tag/v0.3)
+[tag8](https://github.com/NataliyaKh/vector/releases/tag/v0.8)
 
 Я понимаю, что это не финальный тег, так как задание выполнено не до конца. Я не могу победить ошибку, приведённую в пункте 8 раздела Tox. Мне нужна помощь.  
 
