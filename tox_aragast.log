@@ -1,0 +1,304 @@
+root@OVM:/home/vboxuser/git/ansible/vector# rm -rf .tox
+
+root@OVM:/home/vboxuser/git/ansible/vector# docker run --privileged=True -v /home/vboxuser/git/ansible/vector:/opt/vector -w /opt/vector -it aragast/netology:latest /bin/bash
+
+[root@67ef9fbe3b34 vector]# tox
+
+ansible-2.15 create: /opt/vector/.tox/ansible-2.15
+
+ansible-2.15 installdeps: -rtox-requirements.txt, ansible-core==2.15.*, ansible-lint==6.*
+
+ansible-2.15 installed: ansible-compat==24.10.0,ansible-core==2.15.13,ansible-lint==6.22.2,attrs==25.3.0,black==25.1.0,bracex==2.5.post1,certifi==2025.4.26,cffi==1.17.1,charset-normalizer==3.4.2,click==8.1.8,click-help-colors==0.9.4,cryptography==45.0.2,distro==1.9.0,docker==7.1.0,enrich==1.2.7,filelock==3.18.0,idna==3.10,importlib-resources==5.0.7,Jinja2==3.1.6,jmespath==1.0.1,jsonschema==4.23.0,jsonschema-specifications==2025.4.1,lxml==5.4.0,markdown-it-py==3.0.0,MarkupSafe==3.0.2,mdurl==0.1.2,molecule==6.0.3,molecule-plugins==23.6.0,molecule-podman==2.0.3,mypy_extensions==1.1.0,packaging==25.0,pathspec==0.12.1,platformdirs==4.3.8,pluggy==1.6.0,podman==5.4.0.1,pycparser==2.22,Pygments==2.19.1,PyYAML==6.0.2,referencing==0.36.2,requests==2.32.3,resolvelib==1.0.1,rich==14.0.0,rpds-py==0.25.1,ruamel.yaml==0.18.10,ruamel.yaml.clib==0.2.12,selinux==0.3.0,subprocess-tee==0.4.2,tomli==2.2.1,typing_extensions==4.13.2,urllib3==2.4.0,wcmatch==10.0,yamllint==1.37.1
+
+ansible-2.15 run-test-pre: PYTHONHASHSEED='1277555928'
+
+ansible-2.15 run-test-pre: commands[0] | - podman system connection list
+
+Name        URI         Identity    Default
+
+ansible-2.15 run-test-pre: commands[1] | - podman info
+
+host:
+
+  arch: amd64
+
+  buildahVersion: 1.24.1
+
+  cgroupControllers:
+
+  - cpuset
+
+  - cpu
+
+  - io
+
+  - memory
+
+  - hugetlb
+
+  - pids
+
+  - rdma
+
+  - misc
+
+  cgroupManager: cgroupfs
+
+  cgroupVersion: v2
+
+  conmon:
+
+    package: conmon-2.1.0-1.module+el8.6.0+14877+f643d2d6.x86_64
+
+    path: /usr/bin/conmon
+
+    version: 'conmon version 2.1.0, commit: 87b7a9037cbd1d81288bdf2d6705dfda889f7cf9'
+
+  cpus: 4
+
+  distribution:
+
+    distribution: '"rhel"'
+
+    version: "8.6"
+
+  eventLogger: file
+
+  hostname: 67ef9fbe3b34
+
+  idMappings:
+
+    gidmap: null
+
+    uidmap: null
+
+  kernel: 6.8.0-59-generic
+
+  linkmode: dynamic
+
+  logDriver: k8s-file
+
+  memFree: 7132360704
+
+  memTotal: 11010854912
+
+  networkBackend: cni
+
+  ociRuntime:
+
+    name: crun
+
+    package: crun-1.4.4-1.module+el8.6.0+14877+f643d2d6.x86_64
+
+    path: /usr/bin/crun
+
+    version: |-
+
+      crun version 1.4.4
+
+      commit: 6521fcc5806f20f6187eb933f9f45130c86da230
+
+      spec: 1.0.0
+
+      +SYSTEMD +SELINUX +APPARMOR +CAP +SECCOMP +EBPF +YAJL
+
+  os: linux
+
+  remoteSocket:
+
+    path: /run/podman/podman.sock
+
+  security:
+
+    apparmorEnabled: false
+
+    capabilities: CAP_NET_RAW,CAP_CHOWN,CAP_DAC_OVERRIDE,CAP_FOWNER,CAP_FSETID,CAP_KILL,CAP_NET_BIND_SERVICE,CAP_SETFCAP,CAP_SETGID,CAP_SETPCAP,CAP_SETUID,CAP_SYS_CHROOT
+
+    rootless: false
+
+    seccompEnabled: true
+
+    seccompProfilePath: /usr/share/containers/seccomp.json
+
+    selinuxEnabled: false
+
+  serviceIsRemote: false
+
+  slirp4netns:
+
+    executable: /usr/bin/slirp4netns
+
+    package: slirp4netns-1.1.8-2.module+el8.6.0+14877+f643d2d6.x86_64
+
+    version: |-
+
+      slirp4netns version 1.1.8
+
+      commit: d361001f495417b880f20329121e3aa431a8f90f
+
+      libslirp: 4.4.0
+
+      SLIRP_CONFIG_VERSION_MAX: 3
+
+      libseccomp: 2.5.2
+
+  swapFree: 2147479552
+
+  swapTotal: 2147479552
+
+  uptime: 5h 4m 57.05s (Approximately 0.21 days)
+
+plugins:
+
+  log:
+
+  - k8s-file
+
+  - none
+
+  - passthrough
+
+  - journald
+
+  network:
+
+  - bridge
+
+  - macvlan
+
+  - ipvlan
+
+  volume:
+
+  - local
+
+registries:
+
+  search:
+
+  - registry.fedoraproject.org
+
+  - registry.access.redhat.com
+
+  - registry.centos.org
+
+  - docker.io
+
+store:
+
+  configFile: /etc/containers/storage.conf
+
+  containerStore:
+
+    number: 0
+
+    paused: 0
+
+    running: 0
+
+    stopped: 0
+
+  graphDriverName: overlay
+
+  graphOptions:
+
+    overlay.imagestore: /var/lib/shared
+
+    overlay.mount_program:
+
+      Executable: /usr/bin/fuse-overlayfs
+
+      Package: fuse-overlayfs-1.8.2-1.module+el8.6.0+14877+f643d2d6.x86_64
+
+      Version: |-
+
+        fusermount3 version: 3.3.0
+
+        fuse-overlayfs: version 1.8.2
+
+        FUSE library version 3.3.0
+
+        using FUSE kernel interface version 7.26
+
+    overlay.mountopt: nodev,fsync=0
+
+  graphRoot: /var/lib/containers/storage
+
+  graphStatus:
+
+    Backing Filesystem: extfs
+
+    Native Overlay Diff: "false"
+
+    Supports d_type: "true"
+
+    Using metacopy: "false"
+
+  imageCopyTmpDir: /var/tmp
+
+  imageStore:
+
+    number: 0
+
+  runRoot: /run/containers/storage
+
+  volumePath: /var/lib/containers/storage/volumes
+
+version:
+
+  APIVersion: 4.0.2
+
+  Built: 1650363392
+
+  BuiltTime: Tue Apr 19 10:16:32 2022
+
+  GitCommit: ""
+
+  GoVersion: go1.17.7
+
+  OsArch: linux/amd64
+
+  Version: 4.0.2
+
+
+
+ansible-2.15 run-test: commands[0] | molecule test -s third --destroy always
+
+WARNING  Driver docker does not provide a schema.
+
+INFO     third scenario test matrix: destroy, create, converge, destroy
+
+INFO     Performing prerun with role_name_check=1...
+
+INFO     Running third > destroy
+
+INFO     Sanity checks: 'docker'
+
+CRITICAL Unable to contact the Docker daemon. Please refer to https://docs.docker.com/config/daemon/ for managing the daemon
+
+WARNING  An error occurred during the test sequence action: 'destroy'. Cleaning up.
+
+INFO     Running third > cleanup
+
+WARNING  Skipping, cleanup playbook not configured.
+
+INFO     Running third > destroy
+
+INFO     Sanity checks: 'docker'
+
+CRITICAL Unable to contact the Docker daemon. Please refer to https://docs.docker.com/config/daemon/ for managing the daemon
+
+ERROR: InvocationError for command /opt/vector/.tox/ansible-2.15/bin/molecule test -s third --destroy always (exited with code 1)
+
+ansible-2.16 create: /opt/vector/.tox/ansible-2.16
+
+SKIPPED: InterpreterNotFound: python3.10
+
+_____________________________________________________________ summary ______________________________________________________________
+
+ERROR:   ansible-2.15: commands failed
+
+SKIPPED:  ansible-2.16: InterpreterNotFound: python3.10
+
+[root@67ef9fbe3b34 vector]# 
+

@@ -1,0 +1,222 @@
+(venv-py311) root@OVM:/home/vboxuser/git/ansible/vector# tox
+
+ansible-2.16: install_deps> python -I -m pip install 'ansible-core==2.16.*' 'ansible-lint==24.*' -r tox-requirements.txt
+
+ansible-2.16: commands_pre[0]> ansible-galaxy collection install -r requirements.yml --pre
+
+Using /home/vboxuser/git/ansible/vector/ansible.cfg as config file
+
+Skipping install, no requirements found
+
+ansible-2.16: commands_pre[1]> ansible-galaxy collection install containers.podman:==1.16.3
+
+Using /home/vboxuser/git/ansible/vector/ansible.cfg as config file
+
+Starting galaxy collection install process
+
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+
+ansible-2.16: commands_pre[2]> ansible-galaxy collection install community.general
+
+Using /home/vboxuser/git/ansible/vector/ansible.cfg as config file
+
+Starting galaxy collection install process
+
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+
+ansible-2.16: commands_pre[3]> ansible-galaxy collection install ansible.posix
+
+Using /home/vboxuser/git/ansible/vector/ansible.cfg as config file
+
+Starting galaxy collection install process
+
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+
+ansible-2.16: commands[0]> molecule test -s second --destroy always
+
+WARNING  Driver podman does not provide a schema.
+
+INFO     second scenario test matrix: destroy, create, converge, destroy
+
+INFO     Performing prerun with role_name_check=1...
+
+INFO     Running second > destroy
+
+INFO     Sanity checks: 'podman'
+
+Using /root/.ansible/tmp/molecule.sNUc.second/ansible.cfg as config file
+
+
+
+PLAY [Destroy podman instances] ************************************************
+
+
+
+TASK [Remove podman containers] ************************************************
+
+ok: [localhost] => {"actions": [], "changed": false, "container": {}, "podman_actions": []}
+
+
+
+PLAY RECAP *********************************************************************
+
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+INFO     Running second > create
+
+Using /root/.ansible/tmp/molecule.sNUc.second/ansible.cfg as config file
+
+
+
+PLAY [Create] ******************************************************************
+
+
+
+TASK [Log into a container registry] *******************************************
+
+skipping: [localhost] => (item="ubuntu2204 registry username: None specified")  => {"ansible_loop_var": "item", "changed": false, "false_condition": "item.registry is defined", "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "skip_reason": "Conditional result was False"}
+
+skipping: [localhost] => {"changed": false, "msg": "All items skipped"}
+
+
+
+TASK [Check presence of custom Dockerfiles] ************************************
+
+ok: [localhost] => (item=Dockerfile: None specified) => {"ansible_loop_var": "item", "changed": false, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "stat": {"exists": false}}
+
+
+
+TASK [Create Dockerfiles from image names] *************************************
+
+skipping: [localhost] => (item="Dockerfile: None specified; Image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest")  => {"ansible_index_var": "i", "ansible_loop_var": "item", "changed": false, "false_condition": "not item.pre_build_image | default(false)", "i": 0, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "skip_reason": "Conditional result was False"}
+
+skipping: [localhost] => {"changed": false, "msg": "All items skipped"}
+
+
+
+TASK [Discover local Podman images] ********************************************
+
+ok: [localhost] => (item=ubuntu2204) => {"ansible_loop_var": "item", "changed": false, "images": [], "item": {"ansible_index_var": "i", "ansible_loop_var": "item", "changed": false, "false_condition": "not item.pre_build_image | default(false)", "i": 0, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "skip_reason": "Conditional result was False", "skipped": true}}
+
+
+
+TASK [Build an Ansible compatible image] ***************************************
+
+skipping: [localhost] => (item=docker.io/geerlingguy/docker-ubuntu2204-ansible:latest)  => {"ansible_loop_var": "item", "changed": false, "false_condition": "not item.item.pre_build_image | default(false)", "item": {"ansible_index_var": "i", "ansible_loop_var": "item", "changed": false, "false_condition": "not item.pre_build_image | default(false)", "i": 0, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "skip_reason": "Conditional result was False", "skipped": true}, "skip_reason": "Conditional result was False"}
+
+skipping: [localhost] => {"changed": false, "msg": "All items skipped"}
+
+
+
+TASK [Determine the CMD directives] ********************************************
+
+ok: [localhost] => (item="ubuntu2204 command: ") => {"ansible_facts": {"command_directives_dict": {"ubuntu2204": ""}}, "ansible_loop_var": "item", "changed": false, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}}
+
+
+
+TASK [Discover local podman networks] ******************************************
+
+ok: [localhost] => (item=ubuntu2204: host) => {"ansible_loop": {"allitems": [{"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}], "first": true, "index": 1, "index0": 0, "last": true, "length": 1, "revindex": 1, "revindex0": 0}, "ansible_loop_var": "item", "changed": false, "failed_when_result": false, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "msg": "Unable to gather info for host: Error: error inspecting object: no such network host\n"}
+
+
+
+TASK [Create podman network dedicated to this scenario] ************************
+
+skipping: [localhost] => {"changed": false, "false_condition": "podman_network.results[0].ansible_loop.allitems[0].network not in ['bridge', 'none', 'host', 'ns', 'private', 'slirp4netns']", "skip_reason": "Conditional result was False"}
+
+
+
+TASK [Create molecule instance(s)] *********************************************
+
+ok: [localhost] => (item=ubuntu2204) => {"ansible_job_id": "j928501121348.26585", "ansible_loop_var": "item", "changed": false, "finished": 0, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "results_file": "/root/.ansible_async/j928501121348.26585", "started": 1}
+
+
+
+TASK [Wait for instance(s) creation to complete] *******************************
+
+FAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).
+
+changed: [localhost] => (item=ubuntu2204) => {"actions": ["started ubuntu2204"], "ansible_job_id": "j928501121348.26585", "ansible_loop_var": "item", "attempts": 2, "changed": true, "container": {"AppArmorProfile": "", "Args": ["/lib/systemd/systemd"], "BoundingCaps": ["CAP_AUDIT_CONTROL", "CAP_AUDIT_READ", "CAP_AUDIT_WRITE", "CAP_BLOCK_SUSPEND", "CAP_BPF", "CAP_CHECKPOINT_RESTORE", "CAP_CHOWN", "CAP_DAC_OVERRIDE", "CAP_DAC_READ_SEARCH", "CAP_FOWNER", "CAP_FSETID", "CAP_IPC_LOCK", "CAP_IPC_OWNER", "CAP_KILL", "CAP_LEASE", "CAP_LINUX_IMMUTABLE", "CAP_MAC_ADMIN", "CAP_MAC_OVERRIDE", "CAP_MKNOD", "CAP_NET_ADMIN", "CAP_NET_BIND_SERVICE", "CAP_NET_BROADCAST", "CAP_NET_RAW", "CAP_PERFMON", "CAP_SETFCAP", "CAP_SETGID", "CAP_SETPCAP", "CAP_SETUID", "CAP_SYSLOG", "CAP_SYS_ADMIN", "CAP_SYS_BOOT", "CAP_SYS_CHROOT", "CAP_SYS_MODULE", "CAP_SYS_NICE", "CAP_SYS_PACCT", "CAP_SYS_PTRACE", "CAP_SYS_RAWIO", "CAP_SYS_RESOURCE", "CAP_SYS_TIME", "CAP_SYS_TTY_CONFIG", "CAP_WAKE_ALARM"], "Config": {"Annotations": {"io.container.manager": "libpod", "io.kubernetes.cri-o.Created": "2025-05-24T20:09:34.862181262+03:00", "io.kubernetes.cri-o.TTY": "false", "io.podman.annotations.autoremove": "FALSE", "io.podman.annotations.init": "FALSE", "io.podman.annotations.privileged": "TRUE", "io.podman.annotations.publish-all": "FALSE", "org.opencontainers.image.stopSignal": "37"}, "AttachStderr": false, "AttachStdin": false, "AttachStdout": false, "Cmd": ["/lib/systemd/systemd"], "CreateCommand": ["podman", "container", "run", "--name", "ubuntu2204", "--hostname", "ubuntu2204", "--label", "owner=molecule", "--network", "host", "--privileged=True", "--volume", "/sys/fs/cgroup:/sys/fs/cgroup:rw", "--detach=True", "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest"], "Domainname": "", "Entrypoint": "", "Env": ["PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "TERM=xterm", "container=podman", "HTTP_PROXY=http://127.0.0.1:12334/", "HTTPS_PROXY=http://127.0.0.1:12334/", "FTP_PROXY=http://127.0.0.1:12334/", "pip_packages=ansible", "http_proxy=http://127.0.0.1:12334/", "https_proxy=http://127.0.0.1:12334/", "ftp_proxy=http://127.0.0.1:12334/", "no_proxy=localhost,127.0.0.0/8,::1", "NO_PROXY=localhost,127.0.0.0/8,::1", "HOSTNAME=ubuntu2204", "HOME=/root"], "Hostname": "ubuntu2204", "Image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "Labels": {"maintainer": "Jeff Geerling", "org.opencontainers.image.ref.name": "ubuntu", "org.opencontainers.image.version": "22.04", "owner": "molecule"}, "OnBuild": null, "OpenStdin": false, "StdinOnce": false, "StopSignal": 37, "StopTimeout": 10, "SystemdMode": true, "Timeout": 0, "Tty": false, "Umask": "0022", "User": "", "Volumes": null, "WorkingDir": "/"}, "ConmonPidFile": "/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/conmon.pid", "Created": "2025-05-24T20:09:34.862181262+03:00", "Dependencies": [], "Driver": "overlay", "EffectiveCaps": ["CAP_AUDIT_CONTROL", "CAP_AUDIT_READ", "CAP_AUDIT_WRITE", "CAP_BLOCK_SUSPEND", "CAP_BPF", "CAP_CHECKPOINT_RESTORE", "CAP_CHOWN", "CAP_DAC_OVERRIDE", "CAP_DAC_READ_SEARCH", "CAP_FOWNER", "CAP_FSETID", "CAP_IPC_LOCK", "CAP_IPC_OWNER", "CAP_KILL", "CAP_LEASE", "CAP_LINUX_IMMUTABLE", "CAP_MAC_ADMIN", "CAP_MAC_OVERRIDE", "CAP_MKNOD", "CAP_NET_ADMIN", "CAP_NET_BIND_SERVICE", "CAP_NET_BROADCAST", "CAP_NET_RAW", "CAP_PERFMON", "CAP_SETFCAP", "CAP_SETGID", "CAP_SETPCAP", "CAP_SETUID", "CAP_SYSLOG", "CAP_SYS_ADMIN", "CAP_SYS_BOOT", "CAP_SYS_CHROOT", "CAP_SYS_MODULE", "CAP_SYS_NICE", "CAP_SYS_PACCT", "CAP_SYS_PTRACE", "CAP_SYS_RAWIO", "CAP_SYS_RESOURCE", "CAP_SYS_TIME", "CAP_SYS_TTY_CONFIG", "CAP_WAKE_ALARM"], "ExecIDs": [], "ExitCommand": ["/usr/bin/podman", "--root", "/var/lib/containers/storage", "--runroot", "/run/containers/storage", "--log-level", "warning", "--cgroup-manager", "systemd", "--tmpdir", "/run/libpod", "--runtime", "crun", "--events-backend", "journald", "container", "cleanup", "5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6"], "GraphDriver": {"Data": {"LowerDir": "/var/lib/containers/storage/overlay/baf87935dcb3bb99b4d242fcbeb9110e27736c3886c358eacd499e27e2c5b1f1/diff:/var/lib/containers/storage/overlay/d12e431c69ff82e6c60a2e8e27527620d187de48b4c175b78fe6ba50b5a8d317/diff:/var/lib/containers/storage/overlay/7071a7e1b8bbd5a4cbd3bb857a7a70ba65ef0b3328ff43064c3c4f40aa317d49/diff:/var/lib/containers/storage/overlay/eb25decddabba59b9f042f796cca83fb80d5f9f0e3ba2147d725f470fc8f5099/diff:/var/lib/containers/storage/overlay/2e50819ad2363755554f1455aa51845d81c02ca1da026bff6417aa28c5ffc6f4/diff:/var/lib/containers/storage/overlay/d4c2da0e3328e37ce8bd4ecb73554e00ed5abc2d93e1223456c9d630dfe6e993/diff:/var/lib/containers/storage/overlay/fc0b93985bdd8ecebc11145e9cf5ccd62e3a58290353c3fb5abe7e541294feea/diff:/var/lib/containers/storage/overlay/a62846693badc3421d0c7783c0a3425dfb89206da22726faa763de43e3d7f407/diff:/var/lib/containers/storage/overlay/4c5c7c40cfb761fc78cbced47f3f0360c323821798e4486718e2694a75712201/diff:/var/lib/containers/storage/overlay/346f14bf17b9846c3e67362b00c16c9085772033cb7c58742c4e1efa22466d38/diff", "MergedDir": "/var/lib/containers/storage/overlay/db1b472abe8b52d41f78cc41c0d0a0e9caf7ea482a3b9075c35688f49e748c22/merged", "UpperDir": "/var/lib/containers/storage/overlay/db1b472abe8b52d41f78cc41c0d0a0e9caf7ea482a3b9075c35688f49e748c22/diff", "WorkDir": "/var/lib/containers/storage/overlay/db1b472abe8b52d41f78cc41c0d0a0e9caf7ea482a3b9075c35688f49e748c22/work"}, "Name": "overlay"}, "HostConfig": {"AutoRemove": false, "Binds": ["71aa67b043a22ae4270a19aea04fcfb8045b71fd95e7006f4f19bf3119d1990b:/run:rprivate,rw,nodev,exec,nosuid,rbind", "ffcf87676bd1a823edd4d45873fba961bdcf547c0fdf8e9ab5236f9a920003e1:/tmp:rprivate,rw,nodev,exec,nosuid,rbind", "cgroup:/sys/fs/cgroup:private,rw"], "BlkioDeviceReadBps": null, "BlkioDeviceReadIOps": null, "BlkioDeviceWriteBps": null, "BlkioDeviceWriteIOps": null, "BlkioWeight": 0, "BlkioWeightDevice": null, "CapAdd": [], "CapDrop": [], "Cgroup": "", "CgroupConf": null, "CgroupManager": "systemd", "CgroupMode": "private", "CgroupParent": "", "Cgroups": "default", "ConsoleSize": [0, 0], "ContainerIDFile": "", "CpuCount": 0, "CpuPercent": 0, "CpuPeriod": 0, "CpuQuota": 0, "CpuRealtimePeriod": 0, "CpuRealtimeRuntime": 0, "CpuShares": 0, "CpusetCpus": "", "CpusetMems": "", "Devices": [], "DiskQuota": 0, "Dns": [], "DnsOptions": [], "DnsSearch": [], "ExtraHosts": [], "GroupAdd": [], "IOMaximumBandwidth": 0, "IOMaximumIOps": 0, "IpcMode": "private", "Isolation": "", "KernelMemory": 0, "Links": null, "LogConfig": {"Config": null, "Path": "", "Size": "0B", "Tag": "", "Type": "journald"}, "Memory": 0, "MemoryReservation": 0, "MemorySwap": 0, "MemorySwappiness": 0, "NanoCpus": 0, "NetworkMode": "host", "OomKillDisable": false, "OomScoreAdj": 0, "PidMode": "private", "PidsLimit": 2048, "PortBindings": {}, "Privileged": true, "PublishAllPorts": false, "ReadonlyRootfs": false, "RestartPolicy": {"MaximumRetryCount": 0, "Name": ""}, "Runtime": "oci", "SecurityOpt": [], "ShmSize": 65536000, "Tmpfs": {}, "UTSMode": "private", "Ulimits": [{"Hard": 1048576, "Name": "RLIMIT_NOFILE", "Soft": 1048576}, {"Hard": 4194304, "Name": "RLIMIT_NPROC", "Soft": 4194304}], "UsernsMode": "", "VolumeDriver": "", "VolumesFrom": null}, "HostnamePath": "/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/hostname", "HostsPath": "/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/hosts", "Id": "5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6", "Image": "734f14c9458274392a32d38ed4b3bb85df1223e7365f5512a36431a38b5d28c2", "ImageName": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "IsInfra": false, "MountLabel": "", "Mounts": [{"Destination": "/run", "Driver": "local", "Mode": "", "Name": "71aa67b043a22ae4270a19aea04fcfb8045b71fd95e7006f4f19bf3119d1990b", "Options": ["nodev", "exec", "nosuid", "rbind"], "Propagation": "rprivate", "RW": true, "Source": "/var/lib/containers/storage/volumes/71aa67b043a22ae4270a19aea04fcfb8045b71fd95e7006f4f19bf3119d1990b/_data", "Type": "volume"}, {"Destination": "/tmp", "Driver": "local", "Mode": "", "Name": "ffcf87676bd1a823edd4d45873fba961bdcf547c0fdf8e9ab5236f9a920003e1", "Options": ["nodev", "exec", "nosuid", "rbind"], "Propagation": "rprivate", "RW": true, "Source": "/var/lib/containers/storage/volumes/ffcf87676bd1a823edd4d45873fba961bdcf547c0fdf8e9ab5236f9a920003e1/_data", "Type": "volume"}, {"Destination": "/sys/fs/cgroup", "Driver": "", "Mode": "", "Options": [], "Propagation": "private", "RW": true, "Source": "cgroup", "Type": "bind"}], "Name": "ubuntu2204", "Namespace": "", "NetworkSettings": {"Bridge": "", "EndpointID": "", "Gateway": "", "GlobalIPv6Address": "", "GlobalIPv6PrefixLen": 0, "HairpinMode": false, "IPAddress": "", "IPPrefixLen": 0, "IPv6Gateway": "", "LinkLocalIPv6Address": "", "LinkLocalIPv6PrefixLen": 0, "MacAddress": "", "Ports": {}, "SandboxID": "", "SandboxKey": ""}, "OCIConfigPath": "/var/lib/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/config.json", "OCIRuntime": "crun", "Path": "/lib/systemd/systemd", "PidFile": "/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/pidfile", "Pod": "", "ProcessLabel": "", "ResolvConfPath": "/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/resolv.conf", "RestartCount": 0, "Rootfs": "", "State": {"CgroupPath": "/machine.slice/libpod-5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6.scope", "ConmonPid": 26729, "Dead": false, "Error": "", "ExitCode": 0, "FinishedAt": "0001-01-01T00:00:00Z", "Healthcheck": {"FailingStreak": 0, "Log": null, "Status": ""}, "OOMKilled": false, "OciVersion": "1.0.2-dev", "Paused": false, "Pid": 26734, "Restarting": false, "Running": true, "StartedAt": "2025-05-24T20:09:35.03355452+03:00", "Status": "running"}, "StaticDir": "/var/lib/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata"}, "finished": 1, "item": {"ansible_job_id": "j928501121348.26585", "ansible_loop_var": "item", "changed": false, "failed": 0, "finished": 0, "item": {"cgroupns_mode": "host", "command": "", "image": "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest", "name": "ubuntu2204", "network": "host", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "results_file": "/root/.ansible_async/j928501121348.26585", "started": 1}, "podman_actions": ["podman run --name ubuntu2204 --hostname ubuntu2204 --label owner=molecule --network host --privileged=True --volume /sys/fs/cgroup:/sys/fs/cgroup:rw --detach=True docker.io/geerlingguy/docker-ubuntu2204-ansible:latest"], "podman_quadlet": "[Container]\nContainerName=ubuntu2204\nExec=\nHostName=ubuntu2204\nImage=docker.io/geerlingguy/docker-ubuntu2204-ansible:latest\nLabel=owner=molecule\nNetwork=host\nVolume=/sys/fs/cgroup:/sys/fs/cgroup:rw\nPodmanArgs=--privileged\n", "podman_systemd": {"container-ubuntu2204": "# container-ubuntu2204.service\n# autogenerated by Podman 3.4.4\n# Sat May 24 20:09:35 MSK 2025\n\n[Unit]\nDescription=Podman container-ubuntu2204.service\nDocumentation=man:podman-generate-systemd(1)\nWants=network-online.target\nAfter=network-online.target\nRequiresMountsFor=/run/containers/storage\n\n[Service]\nEnvironment=PODMAN_SYSTEMD_UNIT=%n\nRestart=on-failure\nTimeoutStopSec=70\nExecStart=/usr/bin/podman start ubuntu2204\nExecStop=/usr/bin/podman stop -t 10 ubuntu2204\nExecStopPost=/usr/bin/podman stop -t 10 ubuntu2204\nPIDFile=/run/containers/storage/overlay-containers/5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6/userdata/conmon.pid\nType=forking\n\n[Install]\nWantedBy=default.target\n"}, "results_file": "/root/.ansible_async/j928501121348.26585", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6\n", "stdout_lines": ["5f6ac707e7ea3f160f2d61024b86654c493e17d67d37317664c8e9c86a4360c6"]}
+
+
+
+PLAY RECAP *********************************************************************
+
+localhost                  : ok=6    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
+
+
+
+INFO     Running second > converge
+
+Using /root/.ansible/tmp/molecule.sNUc.second/ansible.cfg as config file
+
+
+
+PLAY [Converge] ****************************************************************
+
+
+
+TASK [Include vector] **********************************************************
+
+
+
+TASK [NataliyaKh.vector : Get Vector distrib] **********************************
+
+changed: [ubuntu2204] => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.10"}, "changed": true, "checksum_dest": null, "checksum_src": "7da67e8d84ffcddbd5e0d50452e9dad7fe0c2a48", "dest": "./vector-0.46.1-amd64.deb", "elapsed": 17, "gid": 0, "group": "root", "md5sum": "c7b840bddaa10786342dfdb632cf8a45", "mode": "0644", "msg": "OK (32824450 bytes)", "owner": "root", "size": 32824450, "src": "/root/.ansible/tmp/ansible-tmp-1748106581.1894412-26888-187207097692641/tmpff26pv3_", "state": "file", "status_code": 200, "uid": 0, "url": "https://packages.timber.io/vector/0.46.1/vector_0.46.1-1_amd64.deb"}
+
+
+
+TASK [NataliyaKh.vector : Install Vector packages] *****************************
+
+changed: [ubuntu2204] => {"changed": true, "stderr": "", "stderr_lines": [], "stdout": "Selecting previously unselected package vector.\n(Reading database ... 17487 files and directories currently installed.)\nPreparing to unpack ./vector-0.46.1-amd64.deb ...\nUnpacking vector (0.46.1-1) ...\nSetting up vector (0.46.1-1) ...\nsystemd-journal:x:101:\n", "stdout_lines": ["Selecting previously unselected package vector.", "(Reading database ... 17487 files and directories currently installed.)", "Preparing to unpack ./vector-0.46.1-amd64.deb ...", "Unpacking vector (0.46.1-1) ...", "Setting up vector (0.46.1-1) ...", "systemd-journal:x:101:"]}
+
+
+
+TASK [NataliyaKh.vector : Copy vector config] **********************************
+
+changed: [ubuntu2204] => {"changed": true, "checksum": "5bb791e30323198566ce8baf1a43b2e547f7dc2f", "dest": "/etc/vector/vector.yaml", "gid": 0, "group": "root", "md5sum": "34194e7c97f481afee0457771fce5885", "mode": "0644", "owner": "root", "size": 1353, "src": "/root/.ansible/tmp/ansible-tmp-1748106606.010258-27927-159896393031798/source", "state": "file", "uid": 0}
+
+
+
+RUNNING HANDLER [NataliyaKh.vector : Start Vector service] *********************
+
+changed: [ubuntu2204] => {"changed": true, "enabled": true, "name": "vector", "state": "started", "status": {"ActiveEnterTimestamp": "n/a", "ActiveEnterTimestampMonotonic": "0", "ActiveExitTimestamp": "n/a", "ActiveExitTimestampMonotonic": "0", "ActiveState": "inactive", "After": "system.slice network-online.target sysinit.target systemd-journald.socket basic.target", "AllowIsolate": "no", "AmbientCapabilities": "cap_net_bind_service", "AssertResult": "no", "AssertTimestamp": "n/a", "AssertTimestampMonotonic": "0", "Before": "shutdown.target", "BlockIOAccounting": "no", "BlockIOWeight": "[not set]", "CPUAccounting": "yes", "CPUAffinityFromNUMA": "no", "CPUQuotaPerSecUSec": "infinity", "CPUQuotaPeriodUSec": "infinity", "CPUSchedulingPolicy": "0", "CPUSchedulingPriority": "0", "CPUSchedulingResetOnFork": "no", "CPUShares": "[not set]", "CPUUsageNSec": "[not set]", "CPUWeight": "[not set]", "CacheDirectoryMode": "0755", "CanFreeze": "yes", "CanIsolate": "no", "CanReload": "yes", "CanStart": "yes", "CanStop": "yes", "CapabilityBoundingSet": "cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore", "CleanResult": "success", "CollectMode": "inactive", "ConditionResult": "no", "ConditionTimestamp": "n/a", "ConditionTimestampMonotonic": "0", "ConfigurationDirectoryMode": "0755", "Conflicts": "shutdown.target", "ControlPID": "0", "CoredumpFilter": "0x33", "DefaultDependencies": "yes", "DefaultMemoryLow": "0", "DefaultMemoryMin": "0", "Delegate": "no", "Description": "Vector", "DevicePolicy": "auto", "Documentation": "https://vector.dev", "DynamicUser": "no", "EnvironmentFiles": "/etc/default/vector (ignore_errors=yes)", "ExecMainCode": "0", "ExecMainExitTimestamp": "n/a", "ExecMainExitTimestampMonotonic": "0", "ExecMainPID": "0", "ExecMainStartTimestamp": "n/a", "ExecMainStartTimestampMonotonic": "0", "ExecMainStatus": "0", "ExecReload": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecReloadEx": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; flags= ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecStart": "{ path=/usr/bin/vector ; argv[]=/usr/bin/vector ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecStartEx": "{ path=/usr/bin/vector ; argv[]=/usr/bin/vector ; flags= ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecStartPre": "{ path=/usr/bin/vector ; argv[]=/usr/bin/vector validate ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecStartPreEx": "{ path=/usr/bin/vector ; argv[]=/usr/bin/vector validate ; flags= ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "FailureAction": "none", "FileDescriptorStoreMax": "0", "FinalKillSignal": "9", "FragmentPath": "/lib/systemd/system/vector.service", "FreezerState": "running", "GID": "[not set]", "Group": "vector", "GuessMainPID": "yes", "IOAccounting": "no", "IOReadBytes": "18446744073709551615", "IOReadOperations": "18446744073709551615", "IOSchedulingClass": "2", "IOSchedulingPriority": "4", "IOWeight": "[not set]", "IOWriteBytes": "18446744073709551615", "IOWriteOperations": "18446744073709551615", "IPAccounting": "no", "IPEgressBytes": "[no data]", "IPEgressPackets": "[no data]", "IPIngressBytes": "[no data]", "IPIngressPackets": "[no data]", "Id": "vector.service", "IgnoreOnIsolate": "no", "IgnoreSIGPIPE": "yes", "InactiveEnterTimestamp": "n/a", "InactiveEnterTimestampMonotonic": "0", "InactiveExitTimestamp": "n/a", "InactiveExitTimestampMonotonic": "0", "JobRunningTimeoutUSec": "infinity", "JobTimeoutAction": "none", "JobTimeoutUSec": "infinity", "KeyringMode": "private", "KillMode": "control-group", "KillSignal": "15", "LimitAS": "infinity", "LimitASSoft": "infinity", "LimitCORE": "infinity", "LimitCORESoft": "0", "LimitCPU": "infinity", "LimitCPUSoft": "infinity", "LimitDATA": "infinity", "LimitDATASoft": "infinity", "LimitFSIZE": "infinity", "LimitFSIZESoft": "infinity", "LimitLOCKS": "infinity", "LimitLOCKSSoft": "infinity", "LimitMEMLOCK": "1376354304", "LimitMEMLOCKSoft": "1376354304", "LimitMSGQUEUE": "819200", "LimitMSGQUEUESoft": "819200", "LimitNICE": "0", "LimitNICESoft": "0", "LimitNOFILE": "1048576", "LimitNOFILESoft": "1024", "LimitNPROC": "4194304", "LimitNPROCSoft": "4194304", "LimitRSS": "infinity", "LimitRSSSoft": "infinity", "LimitRTPRIO": "0", "LimitRTPRIOSoft": "0", "LimitRTTIME": "infinity", "LimitRTTIMESoft": "infinity", "LimitSIGPENDING": "41693", "LimitSIGPENDINGSoft": "41693", "LimitSTACK": "infinity", "LimitSTACKSoft": "8388608", "LoadState": "loaded", "LockPersonality": "no", "LogLevelMax": "-1", "LogRateLimitBurst": "0", "LogRateLimitIntervalUSec": "0", "LogsDirectoryMode": "0755", "MainPID": "0", "ManagedOOMMemoryPressure": "auto", "ManagedOOMMemoryPressureLimit": "0", "ManagedOOMPreference": "none", "ManagedOOMSwap": "auto", "MemoryAccounting": "yes", "MemoryAvailable": "infinity", "MemoryCurrent": "[not set]", "MemoryDenyWriteExecute": "no", "MemoryHigh": "infinity", "MemoryLimit": "infinity", "MemoryLow": "0", "MemoryMax": "infinity", "MemoryMin": "0", "MemorySwapMax": "infinity", "MountAPIVFS": "no", "NFileDescriptorStore": "0", "NRestarts": "0", "NUMAPolicy": "n/a", "Names": "vector.service", "NeedDaemonReload": "no", "Nice": "0", "NoNewPrivileges": "no", "NonBlocking": "no", "NotifyAccess": "none", "OOMPolicy": "stop", "OOMScoreAdjust": "0", "OnFailureJobMode": "replace", "OnSuccessJobMode": "fail", "Perpetual": "no", "PrivateDevices": "no", "PrivateIPC": "no", "PrivateMounts": "no", "PrivateNetwork": "no", "PrivateTmp": "no", "PrivateUsers": "no", "ProcSubset": "all", "ProtectClock": "no", "ProtectControlGroups": "no", "ProtectHome": "no", "ProtectHostname": "no", "ProtectKernelLogs": "no", "ProtectKernelModules": "no", "ProtectKernelTunables": "no", "ProtectProc": "default", "ProtectSystem": "no", "RefuseManualStart": "no", "RefuseManualStop": "no", "ReloadResult": "success", "RemainAfterExit": "no", "RemoveIPC": "no", "Requires": "sysinit.target system.slice network-online.target", "Restart": "always", "RestartKillSignal": "15", "RestartUSec": "100ms", "RestrictNamespaces": "no", "RestrictRealtime": "no", "RestrictSUIDSGID": "no", "Result": "success", "RootDirectoryStartOnly": "no", "RuntimeDirectoryMode": "0755", "RuntimeDirectoryPreserve": "no", "RuntimeMaxUSec": "infinity", "SameProcessGroup": "no", "SecureBits": "0", "SendSIGHUP": "no", "SendSIGKILL": "yes", "Slice": "system.slice", "StandardError": "inherit", "StandardInput": "null", "StandardOutput": "journal", "StartLimitAction": "none", "StartLimitBurst": "5", "StartLimitIntervalUSec": "10s", "StartupBlockIOWeight": "[not set]", "StartupCPUShares": "[not set]", "StartupCPUWeight": "[not set]", "StartupIOWeight": "[not set]", "StateChangeTimestamp": "n/a", "StateChangeTimestampMonotonic": "0", "StateDirectoryMode": "0755", "StatusErrno": "0", "StopWhenUnneeded": "no", "SubState": "dead", "SuccessAction": "none", "SyslogFacility": "3", "SyslogLevel": "6", "SyslogLevelPrefix": "yes", "SyslogPriority": "30", "SystemCallErrorNumber": "2147483646", "TTYReset": "no", "TTYVHangup": "no", "TTYVTDisallocate": "no", "TasksAccounting": "yes", "TasksCurrent": "[not set]", "TasksMax": "307", "TimeoutAbortUSec": "1min 30s", "TimeoutCleanUSec": "infinity", "TimeoutStartFailureMode": "terminate", "TimeoutStartUSec": "1min 30s", "TimeoutStopFailureMode": "terminate", "TimeoutStopUSec": "1min 30s", "TimerSlackNSec": "50000", "Transient": "no", "Type": "simple", "UID": "[not set]", "UMask": "0022", "UnitFilePreset": "enabled", "UnitFileState": "disabled", "User": "vector", "UtmpMode": "init", "WatchdogSignal": "6", "WatchdogTimestamp": "n/a", "WatchdogTimestampMonotonic": "0", "WatchdogUSec": "infinity"}}
+
+
+
+PLAY RECAP *********************************************************************
+
+ubuntu2204                 : ok=4    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+INFO     Running second > destroy
+
+Using /root/.ansible/tmp/molecule.sNUc.second/ansible.cfg as config file
+
+
+
+PLAY [Destroy podman instances] ************************************************
+
+
+
+TASK [Remove podman containers] ************************************************
+
+changed: [localhost] => {"actions": ["deleted ubuntu2204"], "changed": true, "container": {}, "podman_actions": ["podman rm --force ubuntu2204"]}
+
+
+
+PLAY RECAP *********************************************************************
+
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+INFO     Pruning extra files from scenario ephemeral directory
+
+  ansible-2.16: OK (63.95=setup[14.91]+cmd[0.52,0.56,0.55,0.54,46.88] seconds)
+
+  congratulations :) (64.02 seconds)
+
